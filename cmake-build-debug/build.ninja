@@ -67,6 +67,12 @@ build CMakeFiles/C_Talk.dir/main.c.obj: C_COMPILER__C_Talk_Debug C$:/Users/bsk14
   OBJECT_DIR = CMakeFiles\C_Talk.dir
   OBJECT_FILE_DIR = CMakeFiles\C_Talk.dir
 
+build CMakeFiles/C_Talk.dir/chat_protocol.c.obj: C_COMPILER__C_Talk_Debug C$:/Users/bsk14/OneDrive/Documents/King$ Of$ The$ Software$ Engineers/C$ Fruit/C-Talk/chat_protocol.c || cmake_object_order_depends_target_C_Talk
+  DEP_FILE = CMakeFiles\C_Talk.dir\chat_protocol.c.obj.d
+  FLAGS = -g -std=gnu11
+  OBJECT_DIR = CMakeFiles\C_Talk.dir
+  OBJECT_FILE_DIR = CMakeFiles\C_Talk.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target C_Talk
@@ -75,7 +81,7 @@ build CMakeFiles/C_Talk.dir/main.c.obj: C_COMPILER__C_Talk_Debug C$:/Users/bsk14
 #############################################
 # Link the executable C_Talk.exe
 
-build C_Talk.exe: C_EXECUTABLE_LINKER__C_Talk_Debug CMakeFiles/C_Talk.dir/main.c.obj
+build C_Talk.exe: C_EXECUTABLE_LINKER__C_Talk_Debug CMakeFiles/C_Talk.dir/main.c.obj CMakeFiles/C_Talk.dir/chat_protocol.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lWs2_32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\C_Talk.dir
