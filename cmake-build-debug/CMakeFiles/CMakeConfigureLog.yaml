@@ -1,0 +1,11 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/husaincode/.cache/JetBrains/RemoteDev/dist/4301d48e0f61a_CLion-252.23309.24/bin/cmake/linux/x64/share/cmake-4.0/Modules/CMakeDetermineSystem.cmake:205 (message)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      The system is: Linux - 5.15.153.1-microsoft-standard-WSL2 - x86_64
+...

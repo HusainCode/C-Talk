@@ -1,3 +1,0 @@
-C:/Users/bsk14/OneDrive/Documents/King Of The Software Engineers/C Fruit/C-Talk/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-C:/Users/bsk14/OneDrive/Documents/King Of The Software Engineers/C Fruit/C-Talk/cmake-build-debug/CMakeFiles/C_Talk.dir
-C:/Users/bsk14/OneDrive/Documents/King Of The Software Engineers/C Fruit/C-Talk/cmake-build-debug/CMakeFiles/edit_cache.dir

@@ -1,8 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
-#include <ws2tcpip.h> // For Windows socket definitions and functions
-#include <winsock2.h> // For TCP/IP protocols and internet functionality
+// Switching to Linux Ubantu
+// #include <ws2tcpip.h> // For Windows socket definitions and functions
+// #include <winsock2.h> // For TCP/IP protocols and internet functionality
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#incldue <sys/socket.h>
+#include <unistd.h>
 
 
 #define PORT 8080  // Port number for the socket connection
