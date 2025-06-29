@@ -1,0 +1,20 @@
+[
+{
+  "directory": "/home/husaincode/C-Talk/build",
+  "command": "/usr/bin/gcc   -g -std=gnu11 -o CMakeFiles/C_Talk.dir/main.c.o -c /home/husaincode/C-Talk/main.c",
+  "file": "/home/husaincode/C-Talk/main.c",
+  "output": "CMakeFiles/C_Talk.dir/main.c.o"
+},
+{
+  "directory": "/home/husaincode/C-Talk/build",
+  "command": "/usr/bin/gcc   -g -std=gnu11 -o CMakeFiles/C_Talk.dir/chat_protocol.c.o -c /home/husaincode/C-Talk/chat_protocol.c",
+  "file": "/home/husaincode/C-Talk/chat_protocol.c",
+  "output": "CMakeFiles/C_Talk.dir/chat_protocol.c.o"
+},
+{
+  "directory": "/home/husaincode/C-Talk/build",
+  "command": "/usr/bin/gcc   -g -std=gnu11 -o CMakeFiles/C_Talk.dir/server.c.o -c /home/husaincode/C-Talk/server.c",
+  "file": "/home/husaincode/C-Talk/server.c",
+  "output": "CMakeFiles/C_Talk.dir/server.c.o"
+}
+]

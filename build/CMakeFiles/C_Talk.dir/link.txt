@@ -1,0 +1,1 @@
+/usr/bin/gcc -g CMakeFiles/C_Talk.dir/main.c.o CMakeFiles/C_Talk.dir/chat_protocol.c.o CMakeFiles/C_Talk.dir/server.c.o -o C_Talk  -lWs2_32 

@@ -1,0 +1,3 @@
+/home/husaincode/C-Talk/build/CMakeFiles/C_Talk.dir
+/home/husaincode/C-Talk/build/CMakeFiles/edit_cache.dir
+/home/husaincode/C-Talk/build/CMakeFiles/rebuild_cache.dir
