@@ -14,7 +14,7 @@ int main() {
     int addrlen = sizeof(address);
     char buffer[BUFFER_SIZE] = {0};
 
-    // create the server socket (IPv4, TCP)
+    // Create the server socket (IPv4, TCP)
     server_fd = socket(AF_INET, SOCK_STREAM, 0);
     if (server_fd < 0) {
         perror("Socket failed");
@@ -26,15 +26,17 @@ int main() {
     address.sin_addr.s_addr = INADDR_ANY;
     address.sin_port = htons(PORT);
 
-    //  Bind the socket to the IP/port
+    // Bind the socket to the IP/port
     if (bind(server_fd, (struct sockaddr *)&address, sizeof(address)) < 0) {
         perror("Bind failed");
+        close(server_fd);
         exit(EXIT_FAILURE);
     }
 
     // Listen for incoming connections
     if (listen(server_fd, 3) < 0) {
         perror("Listen failed");
+        close(server_fd);
         exit(EXIT_FAILURE);
     }
     printf("Server is listening on port %d...\n", PORT);
@@ -43,16 +45,22 @@ int main() {
     new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t *)&addrlen);
     if (new_socket < 0) {
         perror("Accept failed");
+        close(server_fd);
         exit(EXIT_FAILURE);
     }
 
     // Read from the client
-    read(new_socket, buffer, BUFFER_SIZE);
-    printf("Received: %s\n", buffer);
+    ssize_t bytes_read = read(new_socket, buffer, BUFFER_SIZE - 1);
+    if (bytes_read < 0) {
+        perror("Read failed");
+    } else {
+        buffer[bytes_read] = '\0';  // Null-terminate the buffer
+        printf("Received: %s\n", buffer);
 
-    // Send response to client
-    char *response = "Hello from the server!\n";
-    send(new_socket, response, strlen(response), 0);
+        // Send response to client
+        const char *response = "Hello from the server!\n";
+        send(new_socket, response, strlen(response), 0);
+    }
 
     // Close sockets
     close(new_socket);

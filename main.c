@@ -1,54 +1,57 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <malloc.h>
-// Switching to Linux Ubuntu
-// #include <ws2tcpip.h> // For Windows socket definitions and functions
-// #include <winsock2.h> // For TCP/IP protocols and internet functionality
+#include <string.h>
+#include <unistd.h>           // for close()
+#include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#incldue <sys/socket.h>
-#include <unistd.h>
 
-#define PORT 8080  // Port number for the socket connection
-#define SERVER "127.0.0.1"
-#define BUFFER_SIZE 1024 // Buffer size for data transmission
+#define PORT 8080              // Port number
+#define SERVER "127.0.0.1"     // Server IP address
+#define BUFFER_SIZE 1024       // Buffer size for data transmission
 
-
-
-
-
-//////////////////////////////// MAIN /////////////////////////////////////////////////////////////////////
 int main() {
+    int socketFD;
+    struct sockaddr_in serverAddr;
+    char buffer[BUFFER_SIZE] = {0};
 
-    WSADATA wsaData; // Structure to hold information about the Windows Sockets implementation
-    // Initialize Winsock
-    // Variable to store the result of Winsock functions
-    int iResult  = WSAStartup(MAKEWORD(2,2), &wsaData);
-    if (iResult != 0) {
-        printf("WSAStartup failed: %d\n", iResult);
+    // Create a TCP socket
+    socketFD = socket(AF_INET, SOCK_STREAM, 0);
+    if (socketFD < 0) {
+        perror("Socket creation failed");
         return 1;
     }
 
-    // Create a socket for the connection to the server
-    SOCKET socketFD = createTCPIp4Socket();
-    if (socketFD == INVALID_SOCKET) {
-        printf("Error creating socket: %ld\n", WSAGetLastError());
-        WSACleanup();
+    // Setup the server address struct
+    serverAddr.sin_family = AF_INET;
+    serverAddr.sin_port = htons(PORT);
+    if (inet_pton(AF_INET, SERVER, &serverAddr.sin_addr) <= 0) {
+        perror("Invalid address");
+        close(socketFD);
         return 1;
     }
 
-    struct sockaddr_in* addressPtr = createIP4Address(SERVER, PORT);
-    if (!addressPtr) {
-        closesocket(socketFD);
-        WSACleanup();
+    // Connect to the server
+    if (connect(socketFD, (struct sockaddr*)&serverAddr, sizeof(serverAddr)) < 0) {
+        perror("Connection failed");
+        close(socketFD);
         return 1;
     }
-    int result = connectToServer(socketFD, *addressPtr); // Dereference pointer when passing
 
-    // Cleanup
-    free(addressPtr); //free the allocated memory
-    closesocket(socketFD);
-    WSACleanup();
-    return result; // Use the result of the connection attempt
+    printf("Connected to the server.\n");
+
+    // Example: Send a message to server
+    char *message = "Hello from Linux client!";
+    send(socketFD, message, strlen(message), 0);
+
+    // Receive response from server
+    int bytes = read(socketFD, buffer, BUFFER_SIZE - 1);
+    if (bytes > 0) {
+        buffer[bytes] = '\0'; // Null-terminate the received data
+        printf("Server says: %s\n", buffer);
+    }
+
+    // Clean up
+    close(socketFD);
+    return 0;
 }
-/////////////////////////////// END OF MAIN////////////////////////////////////////////////////////////
